@@ -66,8 +66,8 @@ Step 4 : Open CMD and run "php artisan migrate -seed / php artisan db:seed --cla
 Step 5 : Open CMD and Run php artisan tinker
 Template User Register
 \App\Models\User::create([
-    'name' => '',
-    'email' => '',
-    'password' => Hash::make('')
+    'name' => 'Admin',
+    'email' => 'admin@example.com',
+    'password' => Hash::make('password')
 ]);
 
