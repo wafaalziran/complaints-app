@@ -60,10 +60,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # How to Install
 Step 1 : Open CMD and run "Composer install"
-Step 2 : Open CMD and run "php artisan key:generate"
-Step 3 : Copy .env.example and sync with own database
-Step 4 : Open CMD and run "php artisan migrate -seed"
-Step 4 : Open CMD and Run php artisan tinker
+Step 2 : Copy .env.example and sync with own database
+Step 3 : Open CMD and run "php artisan key:generate"
+Step 4 : Open CMD and run "php artisan migrate -seed / php artisan db:seed --class=KategoriSeeder"
+Step 5 : Open CMD and Run php artisan tinker
 Template User Register
 \App\Models\User::create([
     'name' => '',
