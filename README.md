@@ -71,3 +71,10 @@ Template User Register
     'password' => Hash::make('password')
 ]);
 
+Double Login Laravel 11 
+($middleware->redirectTo(
+            guests: '/login',      // Jika belum login, dilempar ke sini
+            users: '/admin'        // JIKA SUDAH login, dilempar ke sini (Double Login fix)
+        );
+Or
+RouteServiceProvider / RedirectIfAuthenticated
