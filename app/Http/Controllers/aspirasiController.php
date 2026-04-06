@@ -7,11 +7,14 @@ use Illuminate\Http\Request;
 
 class aspirasiController extends Controller
 {
+    public function index()
+    {
+        // Mengambil semua data dan mengurutkan dari yang terbaru
+        $semuaAspirasi = aspirasi::latest()->get();
 
-    public function index() {
-        return aspirasi::all();
-    }
-
+        // Kirim variabel ke file view/blade
+        return view('status', compact('semuaAspirasi'));
+}
     public function store(Request $request)
 {
     $request->validate([
@@ -27,7 +30,6 @@ class aspirasiController extends Controller
     ]);
 
     aspirasi::create($request->all());
-
     return back()->with('success', 'Berhasil dikirim');
 }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
    Schema::create('aspirasis', function (Blueprint $table) {
     $table->id();
-    $table->integer('nis');
+    $table->bigInteger('nis');
     $table->integer('id_kategori');
     $table->string('lokasi', 50);
     $table->text('keterangan');

@@ -5,16 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class aspirasi extends Model
 {
+    // Nama tabel di database
+    protected $table = 'aspirasis';
+    
+    // Kolom yang boleh diisi
     protected $fillable = [
-        'nis',
-        'id_kategori',
-        'lokasi',
-        'keterangan',
-        'status',
-        'feedback'
+        'nis',          // Nomor Induk Siswa
+        'id_kategori',  // ID Kategori (FK)
+        'lokasi',       // Lokasi Kejadian
+        'keterangan',   // Isi Laporan
+        'status',       // Status (Menunggu/Proses/Selesai)
+        'feedback'      // Rating/Tanggapan Admin
     ];
-    protected $primaryKey = 'nis'; // Beritahu Laravel PK-nya NIS
-    public $incrementing = false; // Karena NIS biasanya bukan auto-increment
-
-
 }
