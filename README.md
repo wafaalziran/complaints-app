@@ -58,13 +58,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-# User Data Execution
-Open CMD and Run php artisan tinker
-Template
+# How to Install
+Step 1 : Open CMD and run "Composer install"
+Step 2 : Open CMD and run "php artisan key:generate"
+Step 3 : Copy .env.example and sync with own database
+Step 4 : Open CMD and run "php artisan migrate -seed"
+Step 4 : Open CMD and Run php artisan tinker
+Template User Register
 \App\Models\User::create([
     'name' => '',
     'email' => '',
     'password' => Hash::make('')
 ]);
-
 
