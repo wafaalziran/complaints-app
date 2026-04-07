@@ -14,6 +14,7 @@ class aspirasi extends Model
         'lokasi',       // Lokasi Kejadian
         'keterangan',   // Isi Laporan
         'status',       // Status (Menunggu/Proses/Selesai)
-        'feedback'      // Rating/Tanggapan Admin
+        'feedback',     // Rating Urgensi Masalah
+        'pesan_admin'   // Pesan Admin
     ];
 }

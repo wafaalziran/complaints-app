@@ -32,19 +32,22 @@ class adminController extends Controller
         $laporan = $query->latest()->get();
         return view('admin', compact('laporan', 'semuaKategori'));
     }
-    public function update(Request $request, $id)
+
+        public function update(Request $request, $id)
     {
         $request->validate([
             'status' => 'required',
-            'feedback' => 'required'
+            'feedback' => 'required',
+            'pesan_admin' => 'nullable|string' // Validasi pesan
         ]);
 
         $laporan = \App\Models\aspirasi::findOrFail($id);
         $laporan->update([
             'status' => $request->status,
-            'feedback' => $request->feedback
+            'feedback' => $request->feedback,
+            'pesan_admin' => $request->pesan_admin
         ]);
 
-        return redirect()->back()->with('success', 'Status laporan berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Tanggapan berhasil dikirim!');
     }
 }

@@ -54,6 +54,18 @@
         .feedback-text { font-style: italic; color: #34495e; font-size: 13px; margin-top: 5px; background: #f9f9f9; padding: 10px; border-radius: 6px; }
         .stars { color: #f1c40f; font-weight: bold; font-size: 14px; display: block; margin-bottom: 3px; }
         .desc-text { color: #2c3e50; font-weight: bold; font-size: 12px; display: block; }
+        
+        /* Gaya Pesan Admin Baru */
+        .admin-message {
+            margin: 8px 0;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            font-style: normal;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
     </style>
 </head>
 <body>
@@ -76,7 +88,7 @@
                 <th style="width: 15%">Kategori</th>
                 <th style="width: 30%">Keterangan & Lokasi</th>
                 <th style="width: 12%">Status</th>
-                <th style="width: 25%">Tanggapan & Waktu Update</th>
+                <th style="width: 25%">Tanggapan Admin</th>
             </tr>
         </thead>
         <tbody>
@@ -107,11 +119,11 @@
                 </td>
 
                 <td>
-                    @if($item->feedback)
+                    @if($item->feedback || $item->pesan_admin)
                         <div class="feedback-text">
+                            {{-- Tampilkan Bintang Jika Ada --}}
                             @if(is_numeric($item->feedback))
                                 <span class="stars">@for($i = 0; $i < $item->feedback; $i++) ⭐ @endfor</span>
-
                                 <span class="desc-text">
                                     @if($item->feedback == '1') Urgensi: Rendah
                                     @elseif($item->feedback == '2') Urgensi: Menengah
@@ -120,13 +132,20 @@
                                     @elseif($item->feedback == '5') Urgensi: Darurat
                                     @endif
                                 </span>
-                            @else
-                                {{ $item->feedback }}
                             @endif
 
+                            {{-- Tampilkan Pesan Tekstual Admin --}}
+                            @if($item->pesan_admin)
+                                <div class="admin-message">
+                                    <strong style="font-size: 11px; color: #3498db; text-transform: uppercase;">💬 Balasan:</strong><br>
+                                    <span style="font-size: 13px;">{{ $item->pesan_admin }}</span>
+                                </div>
+                            @endif
+
+                            {{-- Indikator Waktu Update --}}
                             @if($item->updated_at != $item->created_at)
                             <div class="update-box">
-                                <span class="update-label">Dibalas Admin:</span>
+                                <span class="update-label">Update Terakhir:</span>
                                 <span class="time-text" style="color: #27ae60; font-weight: bold;">
                                     {{ $item->updated_at->translatedFormat('d M Y, H:i') }} WIB
                                 </span>

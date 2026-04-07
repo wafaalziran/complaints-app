@@ -193,7 +193,7 @@
                         <span style="color: #bdc3c7; font-size: 12px; font-style: italic;">Belum ada tanggapan</span>
                     @endif
                 </td>
-
+                
                 <td>
                     <span class="badge 
                         @if($l->status == 'Menunggu') status-menunggu 
@@ -213,6 +213,13 @@
                                 </select>
                                 <button type="submit" class="btn-save" style="flex: 1;">Simpan</button>
                             </div>
+
+                            <div style="margin-top: 10px;">
+    <label style="font-size: 11px; font-weight: bold; color: #7f8c8d; display: block; margin-bottom: 5px;">PESAN BALASAN:</label>
+    <textarea name="pesan_admin" rows="2" 
+              placeholder="Tulis pesan untuk siswa..." 
+              style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; box-sizing: border-box;">{{ $l->pesan_admin }}</textarea>
+</div>
 
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <label style="font-size: 11px; font-weight: bold; color: #7f8c8d;">URGENSI:</label>
