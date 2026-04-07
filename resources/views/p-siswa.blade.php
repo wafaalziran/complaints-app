@@ -52,11 +52,6 @@
         @csrf
 
         <div class="form-group">
-            <label>NIS</label>
-            <input type="number" name="nis" oninput="if (this.value.length > 10) this.value = this.value.slice(0, 10);" placeholder="Masukkan NIS Anda" required>
-        </div>
-
-        <div class="form-group">
             <label>Kategori</label>
             <select name="id_kategori" required>
                 <option value="">-- Pilih Kategori --</option>

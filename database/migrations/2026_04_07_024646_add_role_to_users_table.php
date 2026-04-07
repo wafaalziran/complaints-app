@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori', function (Blueprint $table) {
-        $table->id('id_kategori');
-        $table->string('ket_kategori');
-        $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+        $table->string('role')->default('siswa'); 
     });
-    }
+}
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategori');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

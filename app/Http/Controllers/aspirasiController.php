@@ -1,45 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\aspirasi;
 
+use App\Models\aspirasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class aspirasiController extends Controller
 {
+    /**
+     * Menampilkan daftar aspirasi (Halaman Status)
+     */
     public function index()
     {
-        // Mengambil semua data dan mengurutkan dari yang terbaru
-        $semuaAspirasi = aspirasi::latest()->get();
-
-        // Kirim variabel ke file view/blade
+        $semuaAspirasi = aspirasi::where('nis', Auth::user()->nis)->get();
         return view('status', compact('semuaAspirasi'));
-}
+    }
+
+    public function create()
+    {
+        return view('p-siswa');
+    }
+
     public function store(Request $request)
-{
-    $request->validate([
-        'nis' => 'required',
-        'id_kategori' => 'required',
-        'lokasi' => 'required',
-        'keterangan' => 'required'
-    ], [
-        'nis.required' => 'NIS wajib diisi',
-        'id_kategori.required' => 'Kategori wajib dipilih',
-        'lokasi.required' => 'Lokasi wajib diisi',
-        'keterangan.required' => 'Keterangan wajib diisi'
-    ]);
+    {
+        $request->validate([
+            'id_kategori' => 'required',
+            'keterangan' => 'required',
+            'lokasi' => 'required',
+        ]);
 
-    aspirasi::create($request->all());
-    return back()->with('success', 'Berhasil dikirim');
-}
+        aspirasi::create([
+            'nis' => Auth::user()->nis,
+            'id_kategori' => $request->id_kategori,
+            'keterangan' => $request->keterangan,
+            'lokasi' => $request->lokasi,
+            'status' => 'Menunggu',
+        ]);
 
-    public function update(Request $request, $id) {
-        $data = aspirasi::find($id);
-        $data->status = $request->status;
-        $data->feedback = $request->feedback;
-        $data->save();
-
-        return back();
+        return redirect('/aspirasi')->with('success', 'Aspirasi berhasil dikirim!');
     }
 }
-

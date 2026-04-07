@@ -67,7 +67,7 @@ Step 5 : Open CMD and Run php artisan tinker
 Template User Register
 \App\Models\User::create([
     'name' => 'Admin',
-    'email' => 'admin@example.com',
+    'email' => 'Admin@example.com',
     'password' => Hash::make('password')
 ]);
 
@@ -78,3 +78,7 @@ Double Login Laravel 11
         );
 Or
 RouteServiceProvider / RedirectIfAuthenticated
+
+App\Models\User::create(['name' => 'wafa', 'email' => 'wafa@example.com', 'password' => Hash::make('wafa'), 'role' => 'siswa']);
+
+$u = App\Models\User::where('email', 'wafa@example.com')->first(); $u->role = 'siswa'; $u->save();

@@ -7,34 +7,39 @@ use Illuminate\Support\Facades\Auth;
 
 class loginController extends Controller
 {
-    // Menampilkan halaman login
+
     public function index()
     {
         return view('login');
     }
 
-    // Proses Autentikasi
-    public function authenticate(Request $request)
+
+   public function authenticate(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $request->validate([
+            'login_identity' => 'required',
+            'password' => 'required',
         ]);
+
+    
+        $loginType = str_contains($request->login_identity, '@') ? 'email' : 'nis';
+
+        $credentials = [
+            $loginType => $request->login_identity,
+            'password' => $request->password,
+        ];
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Jika login berhasil, arahkan ke dashboard admin
-            return redirect()->intended('/admin');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->intended('/admin');
+            }
+            return redirect()->intended('/aspirasi');
         }
 
-        // Jika gagal, kembali dengan pesan error
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->onlyInput('email');
+        return back()->with('loginError', 'Login gagal! Periksa kembali NIS/Email dan Password.');
     }
-
-    // Logout
     public function logout(Request $request)
     {
         Auth::logout();
